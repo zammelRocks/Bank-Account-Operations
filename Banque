@@ -1,0 +1,155 @@
+package banqueSimulation;
+import java.util.*;
+public class Banque {
+	
+	private String nameBanque = "";
+	
+	private  Map<Integer, Compte> map=new HashMap<Integer,Compte>();
+	
+	
+	//creation banque et ajout dans tableau des comptes
+	
+	public Banque(String nameBanque, Compte cpt) {
+		this.nameBanque = nameBanque;
+		cpt = new Compte();
+		map.put(cpt.getNumero(),cpt);
+	}
+	
+	// Getters & setters
+public Map getMap() {
+	return map;
+}
+public void setMap(Map map) {
+	this.map = map;
+}
+public String getNameBanque() {
+	return nameBanque;
+}
+public void setNameBanque(String nameBanque) {
+	this.nameBanque = nameBanque;
+}
+
+/**public void creerCompte(double init) {
+	 map.containsKey(init);
+}**/
+	 
+	public boolean isNumCompte(int n){
+		 return map.containsKey(n);
+	}	
+	
+	public boolean depot(int num,double m) {
+		
+			boolean depot = true;
+		
+			//Integer k = Integer.valueOf(num);
+			
+			//map.put(k, map.get(num).AjoutSolde(m));
+		
+			 for(Map.Entry<Integer, Compte> pair : map.entrySet()) {
+			    	if( pair.getKey()==num) {
+			    		pair.getValue().AjoutSolde(m);
+			    	    map.put(num,pair.getValue());
+			    	    
+			    	}else {
+			    		depot =false;
+			    	}
+			}
+		return depot;	 
+	}
+	
+	public boolean virerVers(double m , int numS, int numD, Banque b) {
+	
+		 boolean drap = true;
+		 
+		 for(Map.Entry<Integer, Compte> pair : map.entrySet()) {
+		    	if( pair.getKey()==numS) {
+		    		
+		    		//pair.getValue().RetraitSolde(m);
+		    	}else {
+		    		drap = false;
+		    	}
+		}
+		 		if (drap ==true) {
+			 
+		 			Map<Integer, Compte> map2=b.getMap();
+		 			for(Map.Entry<Integer, Compte> pair2 : map2.entrySet()) {
+		 				
+		 			
+		 				if( pair2.getKey()==numD) {
+		 					pair2.getValue().AjoutSolde(m);
+		 				}
+		    	}
+		 			
+		 	}
+			 
+			 return drap;
+		 }
+		 		
+	public boolean virerVersInterne(double m,int numS,int numD){
+		
+		 boolean trap = true;
+		 
+		 for(Map.Entry<Integer, Compte> pair : map.entrySet()) {
+		    	if( pair.getKey()==numS) {
+		    		
+		    		//pair.getValue().RetraitSolde(m);
+		    		
+		    		Map.Entry<Integer, Compte> pair2 = (Map.Entry) this.getMap();
+		    		
+		    		if (pair2.getKey()==numD) {
+		    			pair2.getValue().AjoutSolde(m);
+		    			
+		    		}
+		    		
+		    	    }else {
+		    		trap = false;
+		    	    }
+		    
+		}
+		
+			return trap;
+	
+	
+	}
+	
+	private void getCompteDeNum(int n){
+		
+			
+			// Get a set of the entries
+		      Set set = map.entrySet();
+		      
+		      // Get an iterator
+		      Iterator i = set.iterator();
+		     
+		      // Display elements 
+		      while(i.hasNext() && isNumCompte(n)) {
+		         Map.Entry X = (Map.Entry)i.next();
+		         Compte Y = (Compte) X.getValue();
+		         System.out.println(X.getValue());
+		         
+		      }
+		     
+		      
+		      
+		
+	}
+	public double getSoldeTous(){
+		double sum = 0 ;
+		// Get a set of the entries
+	      Set set = map.entrySet();
+	      
+	      // Get an iterator
+	      Iterator i = set.iterator();
+	     
+	      // Display elements 
+	      while(i.hasNext()) {
+	         Map.Entry X = (Map.Entry)i.next();
+	         sum  = sum + ((Compte) X.getValue()).getSolde();
+	      }
+	      return sum;
+	      
+	}
+
+
+
+}
