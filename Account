@@ -1,0 +1,44 @@
+package banqueSimulation;
+
+public class Compte {
+	
+	private int numero =0;
+	private double solde = 0;
+	
+	
+	//constructor
+	public Compte(){
+		//this.solde=solde;
+		this.numero = this.numero+1;
+	}
+	//encapsulation
+	public double getSolde() {
+	    return solde;
+	  }
+	
+	public int getNumero() {
+		return numero;
+	}
+	public void setSolde(double s) {
+		this.solde=s;
+	}
+	
+
+	//methode de depot ajout solde compte
+	
+	public void AjoutSolde(double m) {
+		
+		 this.solde= this.solde + m;
+	}
+	
+	//methode de retrait du solde compte
+	
+	public void RetraitSolde(int s) {
+		
+		 this.solde= this.solde - s;
+	}
+	
+	
+
+
+}
